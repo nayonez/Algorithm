@@ -29,7 +29,6 @@ public class Main {
                 connect++;
             }
         }
-        bfs(0);
         System.out.println(connect);
     }
 
