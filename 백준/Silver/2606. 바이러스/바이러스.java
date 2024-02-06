@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -19,6 +21,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             list.add(new ArrayList<>());
         }
+
         for (int i = 0; i < M; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int u = Integer.parseInt(st.nextToken());
@@ -26,17 +29,23 @@ public class Main {
             list.get(u).add(v);
             list.get(v).add(u);
         }
-        dfs(1);
+        bfs(1);
         System.out.println(count - 1);
     }
-    private static void dfs(int start) {
-        visited[start] = true;
-        count++;
-        for (int a : list.get(start)) {
-            if (visited[a])
-                continue;
-            dfs(a);
-        }
 
-    };
+    private static void bfs(int start) {
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(start);
+        visited[start] = true;
+        while (!queue.isEmpty()) {
+            count++;
+            int temp = queue.poll();
+            for (int a : list.get(temp)) {
+                if (visited[a])
+                    continue;
+                visited[a] = true;
+                queue.offer(a);
+            }
+        }
+    }
 }
