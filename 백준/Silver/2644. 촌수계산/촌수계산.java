@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -33,19 +35,32 @@ public class Main {
             list.get(xParent).add(yChild);
             list.get(yChild).add(xParent);
         }
-        dfs(a, 0); // 나-나 0촌
+        bfs(a, 0);
         System.out.println(sum);
     }
-    private static void dfs(int start, int count) {
-        if (start==b) {
-            sum = count;
-            return;
-        }
+
+    private static void bfs (int start, int count) {
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(start);
         visited[start] = true;
-        for (int a : list.get(start)) {
-            if (visited[a])
-                continue;
-            dfs(a, count+1);
-        }
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int temp = queue.poll();
+                if (temp==b) {
+                    sum = count;
+                    return;
+                }
+                for (int a : list.get(temp)) {
+                    if (visited[a])
+                        continue;
+                    queue.offer(a);
+                    visited[a] = true;
+                }
+            }
+            count++;
+        } sum = -1;
+
     }
 }
