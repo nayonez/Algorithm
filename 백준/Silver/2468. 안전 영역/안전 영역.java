@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
+    static int[][]deltas = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     static int[][] map;
     static boolean[][] safe;
     static int N;
@@ -33,7 +34,8 @@ public class Main {
                         continue;
                     if (map[i][j] <= n)
                         continue;
-                    bfs(i, j, n);
+//                    bfs(i, j, n);
+                    dfs(i, j, n);
                     count++;
                 }
             }
@@ -42,35 +44,20 @@ public class Main {
         System.out.println(max);
     }
 
-    public static void bfs(int r, int c, int n) {
-        int[][]deltas = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        Queue<Node> queue = new ArrayDeque<>();
-        queue.offer(new Node(r, c));
+    public static void dfs(int r, int c, int n) {
         safe[r][c] = true;
-
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
-
-            for (int d = 0; d < 4; d++) {
-                int nr = node.r + deltas[d][0];
-                int nc = node.c + deltas[d][1];
-                if (nr < 0 || nr >= N || nc < 0 || nc >= N)
-                    continue;
-                if (safe[nr][nc])
-                    continue;
-                if (map[nr][nc] <= n)
-                    continue;
-                queue.offer(new Node(nr,nc));
-                safe[nr][nc] = true;
-            }
+        for (int d = 0; d < 4; d++) {
+            int nr = r + deltas[d][0];
+            int nc = c + deltas[d][1];
+            if (nr < 0 || nr >= N || nc < 0 || nc >= N)
+                continue;
+            if (safe[nr][nc])
+                continue;
+            if (map[nr][nc] <= n)
+                continue;
+            dfs(nr, nc, n);
         }
+
     }
 
-    public static class Node {
-        int r, c;
-        public Node(int r, int c) {
-            this.r = r;
-            this.c = c;
-        }
-    }
 }
