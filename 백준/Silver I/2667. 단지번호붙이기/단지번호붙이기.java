@@ -9,6 +9,7 @@ public class Main {
     static boolean[][] visited;
     static int[][] deltas = {{-1,0},{1,0},{0,-1},{0,1}};
 
+
     public static void main(String[] args) throws Exception {
         StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +25,9 @@ public class Main {
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 if (map[r][c]=='0' || visited[r][c]) continue;
-                list.add(bfs(r,c));
+                count = 0;
+//                list.add(bfs(r,c)); // list를 integer로 해서 bfs도 int로 변경=반환할 값은 각 단지내 집의 수->를 list에 추가
+                list.add(dfs(r,c));
             }
         }
 
@@ -35,23 +38,17 @@ public class Main {
         }
         System.out.println(sb);
     }
-    
-    private static int bfs (int r, int c) {
-        count = 0;
-        Queue<Integer[]> queue = new ArrayDeque<>();
-        queue.offer(new Integer[]{r,c});
+
+    private static int dfs(int r, int c) { // 각 단지내 집의 수를 리턴
         visited[r][c] = true;
-        while (!queue.isEmpty()) {
-            count++;
-            Integer[] temp = queue.poll();
-            for (int d = 0; d < 4; d++) {
-                int nr = temp[0] + deltas[d][0];
-                int nc = temp[1] + deltas[d][1];
-                if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
-                if (map[nr][nc]=='0' || visited[nr][nc]) continue;
-                queue.offer(new Integer[] {nr,nc});
-                visited[nr][nc] = true;
-            }
+        count++;
+        for (int d = 0; d < 4; d++) {
+            int nr = r + deltas[d][0];
+            int nc = c + deltas[d][1];
+            if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+            if (map[nr][nc]=='0' || visited[nr][nc]) continue;
+            visited[nr][nc] = true;
+            dfs(nr, nc);
         }
         return count;
     }
