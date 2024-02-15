@@ -24,7 +24,8 @@ public class Main {
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 if (visited[r][c]) continue;
-                bfs(r,c,map[r][c]);
+//                bfs(r,c,map[r][c]);
+                dfs(r,c,map[r][c]);
                 count++;
             }
         } sb.append(count).append(" ");
@@ -41,7 +42,8 @@ public class Main {
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 if (visited[r][c]) continue;
-                bfs(r,c,map[r][c]);
+//                bfs(r,c,map[r][c]);
+                dfs(r,c,map[r][c]);
                 count++;
             }
         } sb.append(count);
@@ -49,21 +51,16 @@ public class Main {
         System.out.println(sb);
     }
 
-    private static void bfs(int r, int c, char color) {
-        Queue<int[]> queue = new ArrayDeque<>();
-        queue.offer(new int[] {r, c});
+    private static void dfs(int r, int c, char color) {
         visited[r][c] = true;
-        while (!queue.isEmpty()) {
-            int[] temp = queue.poll();
-            for (int d = 0; d < 4; d++) {
-                int nr = temp[0] + deltas[d][0];
-                int nc = temp[1] + deltas[d][1];
-                if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
-                if (visited[nr][nc]) continue;
-                if (color!=map[nr][nc]) continue;
-                queue.offer(new int[] {nr, nc});
-                visited[nr][nc] = true;
-            }
+        for (int d = 0; d < 4; d++) {
+            int nr = r + deltas[d][0];
+            int nc = c + deltas[d][1];
+            if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+            if (visited[nr][nc]) continue;
+            if (color!=map[nr][nc]) continue;
+            visited[nr][nc] = true;
+            dfs(nr, nc, map[nr][nc]);
         }
     }
 }
