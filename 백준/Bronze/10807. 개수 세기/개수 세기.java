@@ -1,22 +1,20 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+// 개수 정렬로
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+      
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());;
-        int v = Integer.parseInt(br.readLine());
-        int result = 0;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine()); 
+        int[] input = new int[201];
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] intArr = new int[N];
-
-        for (int i = 0; i < N; i++) {
-            intArr[i] = Integer.parseInt(st.nextToken());
-            if(v == intArr[i]) {
-                result += 1;
-            }
+        for (int i = 0; i < N; i++) { 
+            input[Integer.parseInt(st.nextToken())+100]++;
         }
-        System.out.println(result);
+        System.out.println(input[Integer.parseInt(br.readLine())+100]);
     }
 }
