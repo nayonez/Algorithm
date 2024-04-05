@@ -7,8 +7,12 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         int number = 666;
         while (N > 0) {
-            if (String.valueOf(number).contains("666")) {
-                N--;
+            int temp = number;
+            while (temp >= 666) {
+                if (temp % 1000 == 666) {
+                    N--;
+                    break;
+                } else temp /= 10;
             }
             number++;
         }
