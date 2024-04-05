@@ -4,14 +4,14 @@ import java.util.StringTokenizer;
 
 public class Main {
     static int N, answer;
-    static int[] tgt;
     static int[][] map;
+    static boolean[] selected;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         map = new int[N][N];
-        tgt = new int[N/2];
+        selected = new boolean[N];
         answer = Integer.MAX_VALUE;
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -24,12 +24,8 @@ public class Main {
 
     }
     private static void dfs(int depth, int start) {
-        if (depth == N/2) {
 
-            boolean[] selected = new boolean[N];
-            for (int i = 0; i < tgt.length; i++) {
-                selected[tgt[i]] = true;
-            }
+        if (depth == N/2) {
             int team1 = 0;
             int team2 = 0;
             for (int i = 0; i < N-1; i++) { // 앞에서 보고간 것은 볼 필요 없으니까
@@ -45,8 +41,9 @@ public class Main {
             return;
         }
         for (int i = start; i < N; i++) {
-            tgt[depth] = i;
+            selected[i] = true;
             dfs(depth+1, i+1);
+            selected[i] = false;
         }
     }
 }
