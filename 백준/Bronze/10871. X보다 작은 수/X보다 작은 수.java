@@ -5,18 +5,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int X = Integer.parseInt(st.nextToken());
-        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());       
         StringBuilder sb = new StringBuilder();
-
-        int[] intArr = new int[N];
-
-        for (int i = 0; i < N; i++) {
-            intArr[i] = Integer.parseInt(st.nextToken());
-            if(X > intArr[i]) {
-                sb.append(intArr[i]).append(" ");
-            }
+        int temp = 0;
+        StringTokenizer st2 = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            temp = Integer.parseInt(st2.nextToken());
+            if (x > temp)
+                sb.append(temp).append(" ");
         }
         System.out.println(sb);
     }
