@@ -1,19 +1,19 @@
+import java.util.*;
 import java.io.*;
-
 public class Main {
     public static void main(String[] args) throws Exception {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int N = Integer.parseInt(br.readLine());
 
-        for (int i = 1; i <= N; i++) {
-            for (int j = 0; j < N-i; j++) {
+        for (int i = 1; i <= n; i++) {
+            for (int k = 1; k <= n-i; k++) {
                 sb.append(" ");
             }
-            for (int k = 0; k < i; k++) {
+            for (int j = 1; j <= i; j++) {
                 sb.append("*");
-            } sb.append("\n");
+            }
+            sb.append("\n");
         }
         System.out.println(sb);
     }
