@@ -1,13 +1,25 @@
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        
+    public static void main (String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int score = Integer.parseInt(br.readLine());
-
-        System.out.println(score >= 90 ? "A" : score >= 80 ? "B" : score >= 70 ? "C" : score >= 60 ? "D" : "F");
-
+        int a = Integer.parseInt(br.readLine());
+        
+        switch (a / 10) {
+            case 10 : case 9 :
+                System.out.println("A");
+                break;
+            case 8 :
+                System.out.println("B");
+                break;
+            case 7 :
+                System.out.println("C");
+                break;
+            case 6 :
+                System.out.println("D");
+                break;
+            default :
+                System.out.println("F");
+        }
     }
 }
