@@ -1,18 +1,15 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
 
-// https://www.acmicpc.net/problem/1152 - 단어의 개수
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int ans = 0;
-        while (st.hasMoreTokens()) {
-            st.nextToken();
-            ans++;
+        // 입력 받을 때 앞 뒤 공백이 있다면 제거
+        String s = br.readLine().trim();
+        if (s.isEmpty()) {
+            System.out.println(0);
+        } else {
+            String[] strArr = s.split(" ");
+            System.out.println(strArr.length);
         }
-        System.out.println(ans);
     }
 }
